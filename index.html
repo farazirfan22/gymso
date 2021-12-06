@@ -227,13 +227,13 @@
 				<form>
 					<label class="r5-left-heading">Feel free to ask anything</label>
 					<br>
-					<input type="text" name="text" maxlength="20" placeholder="Name" class="r5-left-input1">
+					<input type="text" name="text" maxlength="20" placeholder="Name" class="r5-left-input1" id="toName">
 					<br>
-					<input type="email" name="email" placeholder="Email" class="r5-left-input2">
+					<input type="email" name="email" placeholder="Email" class="r5-left-input2" id="fromName" required>
 					<br>
-					<textarea placeholder="Message" cols="30" rows="5" class="r5-left-input3"></textarea>
+					<textarea placeholder="Message" cols="30" rows="5" class="r5-left-input3" id="msg"></textarea>
 					<br>
-					<a href="#" class="btn btn-primary r5-left-btn">Send Message</a>
+					<button type="button" class="btn btn-primary r5-left-btn" onclick="sendMail()">Send Message</button>
 				</form>
 			</div>
 			<div class="col-md-6 r5-all-data" data-aos="zoom-in" data-aos-duration="500" data-aos-once="false">
@@ -284,5 +284,25 @@
     		}
 		};
 	</script>
+			<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+			<script type="text/javascript">
+			(function() {
+			emailjs.init("user_wHn8zWgH8TScf33QR3BWE");
+			})();
+			</script>
+			<script>
+				async function sendMail(params){
+					console.log('hello')
+					var tempParams ={
+						from_name: document.getElementById('fromName').value,
+						to_name: document.getElementById('toName').value,
+						message: document.getElementById('msg').value,
+					};
+
+					emailjs.send('gmail','template_yfdxvyn',tempParams)
+					.then(function(res){
+						console.log("success", res.status);
+					})
+				}
+			</script>
 </body>
-</html>
